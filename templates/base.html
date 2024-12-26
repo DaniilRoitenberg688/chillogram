@@ -14,16 +14,21 @@
                 <li class="nav-item">
                     <a class="nav-link fs-3" style="color: white" aria-current="page" href="#">Chillogram</a>
                 </li>
-                {% if is_auth %}
+                {% if user %}
                 <li class="nav-item pt-1">
                     <a class="nav-link fs-4" style="color: #dbdbdb" href="#">top-memes</a>
                 </li>
                 {% endif %}
             </ul>
-            {% if not is_auth %}
+            {% if not user %}
             <div class="me-4">
-                <a class="btn btn-primary">Login</a>
-                <a class="btn btn-success">Register</a>
+                <a class="btn btn-primary" href="/auth/login_form">Login</a>
+                <a class="btn btn-success" href="/auth/register_form">Register</a>
+            </div>
+            {% else %}
+            <h1 class="navbar-brand fs-1 me-5 pe-5">{{user}}</h1>
+            <div class="me-4">
+                <a class="btn btn-danger" href="/auth/logout">logout</a>
             </div>
             {% endif %}
 
