@@ -24,6 +24,18 @@ class User(db.Model):
 class Meme(db.Model):
     __tablename__ = 'memes'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, nullable=True)
+    image = db.Column(db.String, nullable=True)
+    description = db.Column(db.String, nullable=True)
+    likes = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('memes'))
+
+    def to_dict(self):
+        return {'id': self.id,
+                'name': self.name,
+                'image': self.image,
+                'description': self.description,
+                'likes': self.likes}
 
 
